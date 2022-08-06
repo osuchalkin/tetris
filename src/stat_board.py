@@ -15,8 +15,8 @@ class StatBoard():
         # Настройки шрифта для вывода счета.
         self.text_color = (255, 255, 85)
         self.records_color = (255, 85, 0)
-        self.font = pygame.font.SysFont(None, 100)
-        self.font_records = pygame.font.SysFont(None, 30)
+        self.font = pygame.font.SysFont(None, (self.settings.screen_height // 10))
+        self.font_records = pygame.font.SysFont(None, self.settings.screen_width // 40)
         # Подготовка исходного изображения.
         self.prep_score()
         self.prep_level()
@@ -34,14 +34,14 @@ class StatBoard():
         # создаем изображение
         self.score_image = self.font.render(score_str, True, self.text_color)
         self.score_rect = self.score_image.get_rect()
-        self.score_rect.center = (self.settings.x_margin / 2, self.settings.screen_height / 2 + 300)
+        self.score_rect.center = (self.settings.x_margin / 2, self.settings.screen_height / 2 + (self.settings.screen_height / 10) * 3)
 
     def prep_level(self):
         """преобразование уровня в графическое изображение"""
         level_str = str(self.stats.level)
         self.level_image = self.font.render(level_str, True, self.text_color)
         self.level_rect = self.level_image.get_rect()
-        self.level_rect.center = (self.settings.x_margin / 2, self.settings.screen_height / 2 + 100)
+        self.level_rect.center = (self.settings.x_margin / 2, self.settings.screen_height / 2 + self.settings.screen_height / 10)
 
     def prep_records(self):
         """вывод рекордов"""
@@ -56,8 +56,8 @@ class StatBoard():
             name = f'{index+1}   {name}'
             self.name_image.append(self.font_records.render(name, True, self.records_color))
             self.name_rect.append(self.name_image[index].get_rect())
-            self.name_rect[index].left = (self.settings.screen_width - self.settings.x_margin) + 40
-            self.name_rect[index].top = 90 + index * 29
+            self.name_rect[index].left = (self.settings.screen_width - self.settings.x_margin) + self.settings.box_size
+            self.name_rect[index].top = (self.settings.screen_height // 10) + index * (self.settings.screen_height // 34)
             # result
             # форматируем - отделяем тысячи от сотен
             result = str(value)
@@ -68,8 +68,9 @@ class StatBoard():
                 result = f'{thousands} {hundreds}'
             self.result_image.append(self.font_records.render(result, True, self.records_color))
             self.result_rect.append(self.result_image[index].get_rect())
-            self.result_rect[index].left = (self.settings.screen_width - self.settings.x_margin) + 280
-            self.result_rect[index].top = 90 + index * 29
+            self.result_rect[index].left = (self.settings.screen_width - self.settings.x_margin) + (self.settings.screen_width //4)
+            self.result_rect[index].top = (self.settings.screen_height // 10) + index * (self.settings.screen_height // 34)
+        
             index += 1
 
     def show_score(self):

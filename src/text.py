@@ -14,10 +14,10 @@ class TextImage():
         self.text_shadow_color = (0, 85, 255)
         self.text_next_color = (0, 0, 170)
         self.name_color = (255, 85, 0)
-        self.small_font = pygame.font.SysFont(None, 60)
-        self.big_font = pygame.font.SysFont(None, 100)
-        self.next_font = pygame.font.SysFont(None, 50)
-        self.info_font = pygame.font.SysFont(None, 30)
+        self.small_font = pygame.font.SysFont(None, (self.settings.screen_height // 16))
+        self.big_font = pygame.font.SysFont(None, (self.settings.screen_height // 10))
+        self.next_font = pygame.font.SysFont(None, (self.settings.screen_height // 20))
+        self.info_font = pygame.font.SysFont(None, (self.settings.screen_height // 33))
 
         self.info_text = ['This game is clone Tetris-game created Alex Pajitnov in 1984.',
                           'Also this clone based on Al Sweigarts some coding idea and some idea',
@@ -60,7 +60,7 @@ class TextImage():
         # рисуем "Press a key to play"
         presskey_screen, presskey_rect = self.make_text_obj('Press a key to play', self.small_font, self.text_color)
         presskey_rect.center = (int(self.settings.screen_width / 2),
-                                int(self.settings.screen_height / 2) + 300)
+                                int(self.settings.screen_height / 2) + (self.settings.screen_height // 3))
         self.screen.blit(presskey_screen, presskey_rect)
 
         while self.check_for_keypress() is None:
@@ -91,7 +91,7 @@ class TextImage():
         title_screen = self.small_font.render('Enter your name:', True, self.name_color, (0, 0, 0))
         title_rect = title_screen.get_rect()
         title_rect.center = (int(self.settings.screen_width / 2),
-                             int(self.settings.screen_height / 2) - 120)
+                             int(self.settings.screen_height / 2) - (self.settings.screen_height // 8))
         self.screen.blit(title_screen, title_rect)
 
         pygame.display.flip()

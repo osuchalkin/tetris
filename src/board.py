@@ -10,7 +10,7 @@ class Board():
         self.screen = tet_game.screen
         self.settings = tet_game.settings
         self.blank_board = self.get_blank_board()
-        self.image = pygame.transform.scale(pygame.image.load("images/white.png"), (40, 40))
+        self.image = pygame.transform.scale(pygame.image.load("images/white.png"), (self.settings.box_size, self.settings.box_size))
 
     def get_blank_board(self):
         """создает новый стакан"""

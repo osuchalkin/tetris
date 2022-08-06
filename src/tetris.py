@@ -248,7 +248,7 @@ class Tetris:
 
     def draw_next_piece(self, piece):
         """отображение следующей фигуры"""
-        self.draw_piece(piece, pixelx=self.settings.screen_width - 1100, pixely=180)
+        self.draw_piece(piece, pixelx=self.settings.screen_width // 12, pixely=self.settings.screen_height // 5)
 
     def _start_game(self):
         self.text.show_text_screen('T E T R I S')
@@ -276,9 +276,9 @@ class Tetris:
         self.next_piece = Piece(self)
 
     def _draw_status(self):
-        self.text.show_text_next('NEXT', (self.settings.screen_height / 2) - 390)
+        self.text.show_text_next('NEXT', (self.settings.screen_height / 2) - (self.settings.screen_height // 3))
         self.text.show_text_next('LEVEL', self.settings.screen_height / 2)
-        self.text.show_text_next('SCORE', (self.settings.screen_height / 2) + 200)
+        self.text.show_text_next('SCORE', (self.settings.screen_height / 2) + (self.settings.screen_height / 5))
 
     def _update_screen(self):
         # При каждом проходе цикла перерисовывается экран

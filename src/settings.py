@@ -7,17 +7,24 @@ class Settings():
     def __init__(self):
         """Инициализирует статические настройки игры"""
         # параметры экрана
-        self.screen_width = 1200
-        self.screen_height = 1000
+        if pygame.display.Info().current_w < 1200 or pygame.display.Info().current_h < 1000:
+            self.screen_width = 840
+            self.screen_height = 700
+            self.background = pygame.transform.scale(pygame.image.load("images/tet.bmp"), (self.screen_width, self.screen_height))
+        else:
+            self.screen_width = 1200
+            self.screen_height = 1000
+            self.background = pygame.image.load("images/tet.bmp")      
+        
         # получить разрешение монитора
         #  desktop_width, desktop_height = pygame.display.get_desktop_sizes()[0]
         self.fps = 90
-        self.background = pygame.image.load("images/tet.bmp")
+        
         self.caption = "TETRIS 2.0"
         self.icon = pygame.image.load("images/tetris.png")
 
         # параметры box, piece, board
-        self.box_size = 40
+        self.box_size = self.screen_width / 30
         self.board_width = 10
         self.board_height = 20
         self.blank = '.'
@@ -37,4 +44,4 @@ class Settings():
 
         # другие параметры экрана
         self.x_margin = int((self.screen_width - self.board_width * self.box_size) / 2)  # от края экрана до board
-        self.top_margin = self.screen_height - (self.board_height * self.box_size) - 40  # от верха до board
+        self.top_margin = self.screen_height - (self.board_height * self.box_size) - self.box_size  # от верха до board

@@ -150,5 +150,5 @@ class Piece:
 
     def _load_and_transform_image(self, image):
         block_image = pygame.image.load(image)
-        block_image = pygame.transform.scale(block_image, (40, 40))
+        block_image = pygame.transform.scale(block_image, (self.settings.box_size, self.settings.box_size))
         return block_image

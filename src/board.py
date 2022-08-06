@@ -23,14 +23,14 @@ class Board():
         return 0 <= x < self.settings.board_width and y < self.settings.board_height
 
     def add_to_board(self, board, piece):
-        # fill in the board based on piece's location, shape, and rotation
+        """fill in the board based on piece's location, shape, and rotation"""
         for x in range(piece.template_width):
             for y in range(piece.template_height):
                 if piece.pieces[piece.form['shape']][piece.form['rotation']][y][x] != self.settings.blank:
                     board[x + piece.form['x']][y + piece.form['y']] = piece.form['image']
 
     def is_complete_line(self, board, y):
-        # Return True if the line filled with boxes with no gaps.
+        """Return True if the line filled with boxes with no gaps."""
         for x in range(self.settings.board_width):
             if board[x][y] == self.settings.blank:
                 return False
@@ -60,10 +60,10 @@ class Board():
         return num_lines_removed
 
     def draw_removed_line(self, board, y):
+        """заполненная линия забивается белыми боксами и удаляется"""
         while y >= 0:
             if self.is_complete_line(board, y):
                 for x in range(self.settings.board_width):
-                    """заполненная линия забивается белыми боксами"""
                     pixel_x = self.settings.x_margin + (x * self.settings.box_size)
                     pixel_y = self.settings.top_margin + (y * self.settings.box_size)
                     self.screen.blit(self.image, (pixel_x, pixel_y))
@@ -72,7 +72,7 @@ class Board():
             y -= 1
 
     def is_valid_position(self, board, piece, adj_x=0, adj_y=0):
-        # Return True if the piece is within the board and not colliding
+        """ Return True if the piece is within the board and not colliding"""
         for x in range(piece.template_width):
             for y in range(piece.template_height):
                 is_above_board = y + piece.form['y'] + adj_y < 0

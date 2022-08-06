@@ -6,7 +6,7 @@ class Piece:
     """класс 1 блока"""
 
     def __init__(self, tet_game):
-        """начальные значения для позиуии, состояния"""
+        """начальные значения для позиции, состояния"""
         self.screen = tet_game.screen
         self.settings = tet_game.settings
 
@@ -149,6 +149,7 @@ class Piece:
                      }
 
     def _load_and_transform_image(self, image):
+        """Внутренняя функция для загрузки и трансформации изображения"""
         block_image = pygame.image.load(image)
         block_image = pygame.transform.scale(block_image, (self.settings.box_size, self.settings.box_size))
         return block_image

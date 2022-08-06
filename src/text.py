@@ -39,6 +39,7 @@ class TextImage():
                              'H or F1 - this help']
 
     def make_text_obj(self, text, font, color):
+        """Вспомогательная для отображения текста """
         image = font.render(text, True, color)
         image_rect = image.get_rect()
         return image, image_rect
@@ -77,6 +78,7 @@ class TextImage():
         return None
 
     def check_for_quit(self):
+        """проверка на выход"""
         for event in pygame.event.get(pygame.QUIT):  # get all the QUIT event
             pygame.quit()
             sys.exit()
@@ -88,6 +90,7 @@ class TextImage():
         self.screen.blit(title_screen, title_rect)
 
     def show_text_enter_name(self):
+        """Сохранить имя и рекорд"""
         title_screen = self.small_font.render('Enter your name:', True, self.name_color, (0, 0, 0))
         title_rect = title_screen.get_rect()
         title_rect.center = (int(self.settings.screen_width / 2),
@@ -97,6 +100,7 @@ class TextImage():
         pygame.display.flip()
 
     def get_name(self):
+        """Получить имя"""
         # параметры окна ввода
         screen_width, screen_height = self.settings.board_width * self.settings.box_size, 100
         screen_color = (0, 0, 0)

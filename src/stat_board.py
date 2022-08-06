@@ -10,7 +10,6 @@ class StatBoard():
         self.screen_rect = self.screen.get_rect()
         self.settings = tet_game.settings
         self.stats = tet_game.stats
-        # self.text = tet_game.text
 
         # Настройки шрифта для вывода счета.
         self.text_color = (255, 255, 85)
@@ -27,10 +26,7 @@ class StatBoard():
         # делаем пробел между сотнями и тысячами
         score_str = str(self.stats.score)
         if self.stats.score >= 1000:
-            str_score = str(self.stats.score)
-            thousands = str(self.stats.score // 1000)
-            hundreds = str_score[len(str_score)-3 : len(str_score)+1]
-            score_str = f'{thousands} {hundreds}'
+            score_str = self._format_value(self.stats.score)
         # создаем изображение
         self.score_image = self.font.render(score_str, True, self.text_color)
         self.score_rect = self.score_image.get_rect()
@@ -62,14 +58,11 @@ class StatBoard():
             self.name_rect.append(self.name_image[index].get_rect())
             self.name_rect[index].left = (self.settings.screen_width - self.settings.x_margin) + self.settings.box_size
             self.name_rect[index].top = (self.settings.screen_height // 10) + index * (self.settings.screen_height // 34)
+            
             # result
-            # форматируем - отделяем тысячи от сотен
             result = str(value)
             if value >= 1000:
-                str_value = str(value)
-                thousands = str(value // 1000)
-                hundreds = str_value[len(str_value) - 3: len(str_value) + 1]
-                result = f'{thousands} {hundreds}'
+                result = self._format_value(value)
             self.result_image.append(self.font_records.render(result, True, self.records_color))
             self.result_rect.append(self.result_image[index].get_rect())
             self.result_rect[index].left = (self.settings.screen_width - self.settings.x_margin) + (self.settings.screen_width //4)
@@ -87,3 +80,9 @@ class StatBoard():
             self.screen.blit(self.name_image[index], self.name_rect[index])
             self.screen.blit(self.result_image[index], self.result_rect[index])
 
+    def _format_value(self, value):
+        """Format value i.e 10 000"""
+        str_value = str(value)
+        thousands = str(value // 1000)
+        hundreds = str_value[len(str_value) - 3: len(str_value) + 1]
+        return f'{thousands} {hundreds}'

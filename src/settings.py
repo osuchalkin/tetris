@@ -16,8 +16,6 @@ class Settings():
             self.screen_height = 1000
             self.background = pygame.image.load("images/tet.bmp")      
         
-        # получить разрешение монитора
-        #  desktop_width, desktop_height = pygame.display.get_desktop_sizes()[0]
         self.fps = 90
         
         self.caption = "TETRIS 2.0"

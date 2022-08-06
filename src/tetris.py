@@ -45,7 +45,7 @@ class Tetris:
             self._update_screen()
 
     def _check_events(self):
-        # Отслеживание событий клавиатуры и мыши.
+        """Отслеживание событий клавиатуры и мыши."""
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -139,7 +139,7 @@ class Tetris:
             # No falling piece in play, so start a new piece at the top
             self.falling_piece = self.next_piece
             self.next_piece = Piece(self)
-            self.last_fall_time = time.time()  # reset lastFallTime
+            self.last_fall_time = time.time()  # reset last_fall_time
 
             if not self.board.is_valid_position(self.board.blank_board, self.falling_piece):
                 self.stats.game_active = False
@@ -223,11 +223,10 @@ class Tetris:
             return
         if pixelx is None and pixely is None:
             pixelx, pixely = self.convert_to_pixel_coords(boxx, boxy)
-        self.screen.blit(self.next_piece.images[image], (pixelx, pixely))
-        # pygame.draw.rect(self.screen, (0, 0, 0), (pixelx + 1, pixely + 1, self.settings.box_size - 1, self.settings.box_size - 1))
-        # pygame.draw.rect(DISPLAYSURF, LIGHTCOLORS[color], (pixelx + 1, pixely + 1, BOXSIZE - 4, BOXSIZE - 4))
+        self.screen.blit(self.next_piece.images[image], (pixelx, pixely))   
 
     def draw_piece(self, piece, pixelx=None, pixely=None):
+        """Фигура"""
         shape_to_draw = piece.pieces[piece.form['shape']][piece.form['rotation']]
         if pixelx is None and pixely is None:
             # if pixelx & pixely hasn't been specified, use the location stored in the piece data structure
@@ -241,7 +240,7 @@ class Tetris:
                                   pixelx + (x * self.settings.box_size), pixely + (y * self.settings.box_size))
 
     def draw_board(self, board):
-        # draw the individual boxes on the board
+        """draw the individual boxes on the board"""
         for x in range(self.settings.board_width):
             for y in range(self.settings.board_height):
                 self.draw_box(x, y, board[x][y])
@@ -251,6 +250,7 @@ class Tetris:
         self.draw_piece(piece, pixelx=self.settings.screen_width // 12, pixely=self.settings.screen_height // 5)
 
     def _start_game(self):
+        """Начальные установки для игры"""
         self.text.show_text_screen('T E T R I S')
         # сброс статистики
         self.stats.reset_stats()
@@ -276,12 +276,13 @@ class Tetris:
         self.next_piece = Piece(self)
 
     def _draw_status(self):
+        """Отображение статуса игры"""
         self.text.show_text_next('NEXT', (self.settings.screen_height / 2) - (self.settings.screen_height // 3))
         self.text.show_text_next('LEVEL', self.settings.screen_height / 2)
         self.text.show_text_next('SCORE', (self.settings.screen_height / 2) + (self.settings.screen_height / 5))
 
     def _update_screen(self):
-        # При каждом проходе цикла перерисовывается экран
+        """При каждом проходе цикла перерисовывается экран"""
         self.screen.blit(self.settings.background, (0, 0))
 
         if not self.stats.game_active:

@@ -31,6 +31,7 @@ class TextImage():
                              'RIGHT or 6 - right move',
                              'UP or 5 - rotation',
                              'DOWN - down move',
+                             'SPACE - drop down',
                              '',
                              'P or PAUSE = pause',
                              'N - new game',

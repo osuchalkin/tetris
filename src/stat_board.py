@@ -53,7 +53,11 @@ class StatBoard():
 
         for name, value in self.stats.records.items():
             # name
-            name = f'{index+1}   {name}'
+            # чтобы выровнять 1 - 9
+            if (index + 1) < 10:
+                name = f' {index+1}    {name}'
+            else:
+                name = f'{index+1}   {name}'
             self.name_image.append(self.font_records.render(name, True, self.records_color))
             self.name_rect.append(self.name_image[index].get_rect())
             self.name_rect[index].left = (self.settings.screen_width - self.settings.x_margin) + self.settings.box_size
